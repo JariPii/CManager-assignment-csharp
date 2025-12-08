@@ -5,8 +5,11 @@ using System.Text;
 
 namespace CManager.Domain.Models
 {
-    internal class CustomerModel
+    public class CustomerModel
     {
+
+        public Guid Id { get; set; }
+
         [StringLength(50)]
         public required string FirstName { get; set; }
         [StringLength(50)]

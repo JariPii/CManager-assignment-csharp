@@ -5,8 +5,8 @@ using System.Text;
 
 namespace CManager.Domain.Models
 {
-    internal class AddressModel
-    {
+    public class AddressModel
+    {        
         [StringLength(50)]
         public required string StreetAddress { get; set; }
 
