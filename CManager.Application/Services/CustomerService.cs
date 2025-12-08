@@ -27,7 +27,7 @@ namespace CManager.Application.Services
                 Address = new AddressModel
                 {
                     StreetAddress = streetAddress,
-                    ProstalCode = postalCode,
+                    PostalCode = postalCode,
                     City = city
                 }
             };

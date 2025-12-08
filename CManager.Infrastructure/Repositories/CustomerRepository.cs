@@ -12,10 +12,16 @@ namespace CManager.Infrastructure.Repositories
         private readonly string _directoryPath;
         private readonly JsonSerializerOptions _jsonOptions;
 
-        public CustomerRepository(string directoryPath = "Data", string filename = "customers.json")
+        public CustomerRepository(string directoryPath = "Data", string fileName = "customers.json")
         {
             _directoryPath = directoryPath;
-            _filePath = Path.Combine(_directoryPath, filename);
+            _filePath = Path.Combine(_directoryPath, fileName);
+
+            _jsonOptions = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                PropertyNameCaseInsensitive = true
+            };
         }
 
         public List<CustomerModel> GetAllCustomers()
@@ -50,12 +56,12 @@ namespace CManager.Infrastructure.Repositories
                 var json = JsonSerializer.Serialize(customers, _jsonOptions);
 
                 if (!Directory.Exists(_directoryPath))
-                {
+                
                     Directory.CreateDirectory(_directoryPath);
 
                     File.WriteAllText(_filePath, json);
                     return true;
-                }
+                
             }
             catch (Exception ex)
             {

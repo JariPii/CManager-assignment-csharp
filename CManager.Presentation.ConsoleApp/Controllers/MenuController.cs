@@ -19,10 +19,11 @@ namespace CManager.Presentation.ConsoleApp.Controllers
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine($@"Customer Manager
-                                    1. Create Customer
-                                    2. View All Customers
-                                    0. Exit program");
+                Console.WriteLine($@"Customer Manager 
+
+    1. Create Customer
+    2. View All Customers
+    0. Exit program");
                 Console.Write("Choose an option: ");
 
                 var option = Console.ReadLine();
@@ -86,7 +87,7 @@ namespace CManager.Presentation.ConsoleApp.Controllers
         private void ViewAllCustomers()
         {
             Console.Clear();
-            Console.WriteLine("All Customers");
+            Console.WriteLine("All Customers \n");
 
             var customers = _customerService.GetAllCustomers(out bool hasError);
 
@@ -104,14 +105,16 @@ namespace CManager.Presentation.ConsoleApp.Controllers
                 foreach(var customer in customers)
                 {
                     Console.WriteLine($@"Name: {customer.FirstName} {customer.LastName}
-                                         EMail: {customer.Email}
-                                         Phone: {customer.PhoneNumber}
-                                         Address: {customer.Address.StreetAddress}
-                                                  {customer.Address.PostalCode} {customer.Address.City}
-                                         Id: {customer.Id}");
+Email: {customer.Email}
+Phone: {customer.PhoneNumber}
+Address: {customer.Address.StreetAddress}
+{customer.Address.PostalCode} {customer.Address.City}
+Id: {customer.Id}");
                     Console.WriteLine();
                 }
             }
+
+            OutputDialog("Press any key...");
         }
 
         private void OutputDialog(string message)
