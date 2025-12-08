@@ -82,6 +82,43 @@ namespace CManager.Presentation.ConsoleApp.Controllers
 
             OutputDialog("Press any key to continue...");
         }
+
+        private void ViewAllCustomers()
+        {
+            Console.Clear();
+            Console.WriteLine("All Customers");
+
+            var customers = _customerService.GetAllCustomers(out bool hasError);
+
+            if (hasError)
+            {
+                Console.WriteLine("Failed to get customers. Please try again later!");
+            }
+
+            if (!customers.Any())
+            {
+                Console.WriteLine("No customers found");
+            }
+            else
+            {
+                foreach(var customer in customers)
+                {
+                    Console.WriteLine($@"Name: {customer.FirstName} {customer.LastName}
+                                         EMail: {customer.Email}
+                                         Phone: {customer.PhoneNumber}
+                                         Address: {customer.Address.StreetAddress}
+                                                  {customer.Address.ProstalCode} {customer.Address.City}
+                                         Id: {customer.Id}");
+                    Console.WriteLine();
+                }
+            }
+        }
+
+        private void OutputDialog(string message)
+        {
+            Console.WriteLine(message);
+            Console.ReadKey();
+        }
     }
 
 }
