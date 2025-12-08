@@ -11,7 +11,7 @@ namespace CManager.Domain.Models
         public required string StreetAddress { get; set; }
 
         [StringLength(50)]
-        public required string ProstalCode { get; set; }
+        public required string PostalCode { get; set; }
 
         [StringLength(50)]
         public required string City { get; set; }
