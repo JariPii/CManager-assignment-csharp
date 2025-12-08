@@ -38,7 +38,7 @@ namespace CManager.Presentation.ConsoleApp.Controllers
                     case "0":
                         return;
                     default:
-                        OutputDialog("Invalid option!")
+                        OutputDialog("Invalid option!");
                             break;
                 }
             }
@@ -107,7 +107,7 @@ namespace CManager.Presentation.ConsoleApp.Controllers
                                          EMail: {customer.Email}
                                          Phone: {customer.PhoneNumber}
                                          Address: {customer.Address.StreetAddress}
-                                                  {customer.Address.ProstalCode} {customer.Address.City}
+                                                  {customer.Address.PostalCode} {customer.Address.City}
                                          Id: {customer.Id}");
                     Console.WriteLine();
                 }
