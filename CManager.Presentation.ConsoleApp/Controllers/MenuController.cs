@@ -1,7 +1,9 @@
 ﻿using CManager.Application.Services;
+using CManager.Presentation.ConsoleApp.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace CManager.Presentation.ConsoleApp.Controllers
 {
@@ -21,9 +23,9 @@ namespace CManager.Presentation.ConsoleApp.Controllers
                 Console.Clear();
                 Console.WriteLine($@"Customer Manager 
 
-    1. Create Customer
-    2. View All Customers
-    0. Exit program");
+1. Create Customer
+2. View All Customers
+0. Exit program");
                 Console.Write("Choose an option: ");
 
                 var option = Console.ReadLine();
@@ -49,26 +51,13 @@ namespace CManager.Presentation.ConsoleApp.Controllers
             Console.Clear();
             Console.WriteLine("Create customer");
 
-            Console.Write("First name: ");
-            var firstName = Console.ReadLine()!;
-
-            Console.Write("Last name: ");
-            var lastName = Console.ReadLine()!;
-
-            Console.Write("Email: ");
-            var email = Console.ReadLine()!;
-
-            Console.Write("Phonenumber: ");
-            var phoneNumber = Console.ReadLine()!;
-
-            Console.Write("Street: ");
-            var streetAddress = Console.ReadLine()!;
-
-            Console.Write("Postal code: ");
-            var postalCode = Console.ReadLine()!;
-
-            Console.Write("City: ");
-            var city = Console.ReadLine()!;
+            var firstName = InputHelper.ValidateInput("First name", ValidationType.Required);
+            var lastName = InputHelper.ValidateInput("Last name", ValidationType.Required);
+            var email = InputHelper.ValidateInput("Email", ValidationType.Email);
+            var phoneNumber = InputHelper.ValidateInput("Phone number", ValidationType.Required);
+            var streetAddress = InputHelper.ValidateInput("streetAddress", ValidationType.Required);
+            var postalCode = InputHelper.ValidateInput("postalCode", ValidationType.Required);
+            var city = InputHelper.ValidateInput("city", ValidationType.Required);
 
             var result = _customerService.CreateCustomer(firstName, lastName, email, phoneNumber, streetAddress, postalCode, city);
 
