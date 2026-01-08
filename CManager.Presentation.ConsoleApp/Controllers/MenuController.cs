@@ -1,7 +1,9 @@
 ﻿using CManager.Application.Services;
+using CManager.Presentation.ConsoleApp.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace CManager.Presentation.ConsoleApp.Controllers
 {
@@ -27,9 +29,10 @@ namespace CManager.Presentation.ConsoleApp.Controllers
                 Console.Clear();
                 Console.WriteLine($@"Customer Manager 
 
-    1. Create Customer
-    2. View All Customers
-    0. Exit program");
+1. Create Customer
+2. View All Customers
+3. Delete Customer
+0. Exit program");
                 Console.Write("Choose an option: ");
 
                 var option = Console.ReadLine();
@@ -41,6 +44,9 @@ namespace CManager.Presentation.ConsoleApp.Controllers
                         break;
                     case "2":
                         ViewAllCustomers();
+                        break;
+                    case "3":
+                        DeleteCustomer();
                         break;
                     case "0":
                         return;
@@ -87,7 +93,7 @@ namespace CManager.Presentation.ConsoleApp.Controllers
     //            Console.WriteLine("There was a hickup while creating customer, please try again!");
     //        }
 
-    //        OutputDialog("Press any key to continue...");
+        //        OutputDialog("Press any key to continue...");
     //    }
 
         private void ViewAllCustomers()
@@ -108,7 +114,7 @@ namespace CManager.Presentation.ConsoleApp.Controllers
             }
             else
             {
-                foreach(var customer in customers)
+                foreach (var customer in customers)
                 {
                     Console.WriteLine($@"Name: {customer.FirstName} {customer.LastName}
 Email: {customer.Email}
@@ -121,12 +127,6 @@ Id: {customer.Id}");
             }
 
             OutputDialog("Press any key...");
-        }
-
-        private void OutputDialog(string message)
-        {
-            Console.WriteLine(message);
-            Console.ReadKey();
         }
     }
 

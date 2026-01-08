@@ -62,5 +62,27 @@ namespace CManager.Application.Services
                 return [];
             }
         }
+
+        public bool DeleteCustomer(Guid id)
+        {
+            try
+            {
+            var customers = _customerRepository.GetAllCustomers();
+                var customer = customers.FirstOrDefault(c => c.Id == id);
+
+                if (customer == null)
+                    return false;
+
+                customers.Remove(customer);
+                var result = _customerRepository.SaveCustomers(customers);
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting customer: {ex.Message}");
+                return false;
+            }
+        }
     }
 }
