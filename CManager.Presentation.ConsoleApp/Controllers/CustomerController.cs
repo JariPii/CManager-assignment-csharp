@@ -155,6 +155,19 @@ Address: {customer.Address.StreetAddress}
         public void DeleteCustomer(CustomerModel customer)
         {
             Console.Clear();
+            Console.Write($"Are you sure you want to delete {customer.FirstName} {customer.LastName}? (y/n): ");
+
+            var confirmation = Console.ReadLine()?.Trim().ToLower();
+
+            if(confirmation == "y")
+            {
+                var result = _customerService.DeleteCustomer(customer.Id);
+                OutputDialog(result ? "Customer was removed" : "Something want wrong. Support is available for help");
+            }
+            else
+            {
+                OutputDialog("Deletion canceled");
+            }
         }
 
         //public void DeleteCustomer(CustomerModel customer)

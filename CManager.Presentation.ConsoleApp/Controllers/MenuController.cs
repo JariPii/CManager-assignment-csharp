@@ -25,7 +25,6 @@ namespace CManager.Presentation.ConsoleApp.Controllers
 
 1. Create Customer
 2. View All Customers
-3. Delete Customer
 0. Exit program");
                 Console.Write("Choose an option: ");
 
