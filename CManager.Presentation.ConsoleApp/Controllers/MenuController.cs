@@ -9,13 +9,7 @@ namespace CManager.Presentation.ConsoleApp.Controllers
 {
     public class MenuController
     {
-        //private readonly ICustomerService _customerService;
         private readonly CustomerController _customerController;
-
-        //public MenuController(ICustomerService customerService)
-        //{
-        //    _customerService = customerService;
-        //}
 
         public MenuController(CustomerController customerController)
         {
@@ -43,90 +37,23 @@ namespace CManager.Presentation.ConsoleApp.Controllers
                         _customerController.CreateCustomer();
                         break;
                     case "2":
-                        ViewAllCustomers();
+                        _customerController.ViewAllCustomers();
                         break;
                     case "3":
-                        DeleteCustomer();
+                        _customerController.DeleteCustomer();
                         break;
                     case "0":
                         return;
                     default:
                         OutputDialog("Invalid option!");
-                            break;
+                        break;
                 }
             }
         }
-    //private void CreateCustomer()
-    //    {
-    //        Console.Clear();
-    //        Console.WriteLine("Create customer");
-
-    //        Console.Write("First name: ");
-    //        var firstName = Console.ReadLine()!;
-
-    //        Console.Write("Last name: ");
-    //        var lastName = Console.ReadLine()!;
-
-    //        Console.Write("Email: ");
-    //        var email = Console.ReadLine()!;
-
-    //        Console.Write("Phonenumber: ");
-    //        var phoneNumber = Console.ReadLine()!;
-
-    //        Console.Write("Street: ");
-    //        var streetAddress = Console.ReadLine()!;
-
-    //        Console.Write("Postal code: ");
-    //        var postalCode = Console.ReadLine()!;
-
-    //        Console.Write("City: ");
-    //        var city = Console.ReadLine()!;
-
-    //        var result = _customerService.CreateCustomer(firstName, lastName, email, phoneNumber, streetAddress, postalCode, city);
-
-    //        if (result)
-    //        {
-    //            Console.WriteLine($"Customer: {firstName} {lastName} added.");
-    //        }
-    //        else
-    //        {
-    //            Console.WriteLine("There was a hickup while creating customer, please try again!");
-    //        }
-
-        //        OutputDialog("Press any key to continue...");
-    //    }
-
-        private void ViewAllCustomers()
+        private void OutputDialog(string message)
         {
-            Console.Clear();
-            Console.WriteLine("All Customers \n");
-
-            var customers = _customerService.GetAllCustomers(out bool hasError);
-
-            if (hasError)
-            {
-                Console.WriteLine("Failed to get customers. Please try again later!");
-            }
-
-            if (!customers.Any())
-            {
-                Console.WriteLine("No customers found");
-            }
-            else
-            {
-                foreach (var customer in customers)
-                {
-                    Console.WriteLine($@"Name: {customer.FirstName} {customer.LastName}
-Email: {customer.Email}
-Phone: {customer.PhoneNumber}
-Address: {customer.Address.StreetAddress}
-{customer.Address.PostalCode} {customer.Address.City}
-Id: {customer.Id}");
-                    Console.WriteLine();
-                }
-            }
-
-            OutputDialog("Press any key...");
+            Console.WriteLine(message);
+            Console.ReadKey();
         }
     }
 

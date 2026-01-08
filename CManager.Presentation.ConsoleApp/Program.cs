@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 var services = new ServiceCollection()
     .AddScoped<ICustomerService, CustomerService>()
     .AddScoped<ICustomerRepository, CustomerRepository>()
+    .AddScoped<CustomerController>()
     .AddScoped<MenuController>()
     .BuildServiceProvider();
 
