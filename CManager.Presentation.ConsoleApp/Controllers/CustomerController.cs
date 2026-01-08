@@ -77,6 +77,7 @@ namespace CManager.Presentation.ConsoleApp.Controllers
             for (int i = 0; i < customers.Count; i++)
             {
                 var c = customers[i];
+                Console.WriteLine($"[{i + 1}] {c.FirstName} {c.LastName} - {c.Email}");
             }
 
             Console.WriteLine("[0] Go back to menu");
@@ -90,6 +91,12 @@ namespace CManager.Presentation.ConsoleApp.Controllers
             }
 
             if (choise == 0) return;
+
+            if(choise < 1 || choise > customers.Count)
+            {
+                OutputDialog($"Number must be between 1 and {customers.Count}");
+                return;
+            }
 
             var selectedCustomer = customers[choise - 1];
 
@@ -128,52 +135,26 @@ namespace CManager.Presentation.ConsoleApp.Controllers
             }
         }
 
-//        public void ViewAllCustomers()
-//        {
-//            Console.Clear();
-//            Console.WriteLine("All Customers \n");
-
-//            var customers = _customerService.GetAllCustomers(out bool hasError);
-
-//            if (hasError)
-//            {
-//                Console.WriteLine("Failed to get customers. Please try again later!");
-//            }
-
-//            if (!customers.Any())
-//            {
-//                Console.WriteLine("No customers found");
-//            }
-//            else
-//            {
-//                foreach (var customer in customers)
-//                {
-//                    Console.WriteLine($@"Name: {customer.FirstName} {customer.LastName}
-//        Email: {customer.Email}
-//"
-//        );
-//                    Console.WriteLine();
-//                }
-//            }
-
-//            Console.WriteLine("Enter customer id");
-//            var input = Console.ReadLine();
-
-//            if (!int.TryParse(input, out int customerId) || customerId == 0)
-//                return;
-
-//            //OutputDialog("Press any key...");
-//        }
-
+//       
         public void ViewCustomer(CustomerModel customer)
         {
             Console.Clear();
+            Console.WriteLine("Customer details\n");
+
+            Console.WriteLine($@"Name: {customer.FirstName} {customer.LastName}
+Email: {customer.Email}
+Phone: {customer.PhoneNumber}
+Address: {customer.Address.StreetAddress}
+{customer.Address.PostalCode} {customer.Address.City}
+");
+
+            OutputDialog("Press any key to go back");
 
         }
 
         public void DeleteCustomer(CustomerModel customer)
         {
-
+            Console.Clear();
         }
 
         //public void DeleteCustomer(CustomerModel customer)

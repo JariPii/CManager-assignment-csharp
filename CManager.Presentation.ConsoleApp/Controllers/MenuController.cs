@@ -39,9 +39,9 @@ namespace CManager.Presentation.ConsoleApp.Controllers
                     case "2":
                         _customerController.ViewAllCustomers();
                         break;
-                    case "3":
-                        _customerController.DeleteCustomer();
-                        break;
+                    //case "3":
+                    //    _customerController.DeleteCustomer();
+                    //    break;
                     case "0":
                         return;
                     default:
