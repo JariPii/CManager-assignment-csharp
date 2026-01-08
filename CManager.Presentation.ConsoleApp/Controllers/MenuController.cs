@@ -7,11 +7,17 @@ namespace CManager.Presentation.ConsoleApp.Controllers
 {
     public class MenuController
     {
-        private readonly ICustomerService _customerService;
+        //private readonly ICustomerService _customerService;
+        private readonly CustomerController _customerController;
 
-        public MenuController(ICustomerService customerService)
+        //public MenuController(ICustomerService customerService)
+        //{
+        //    _customerService = customerService;
+        //}
+
+        public MenuController(CustomerController customerController)
         {
-            _customerService = customerService;
+            _customerController = customerController;
         }
 
         public void ShowMenu()
@@ -31,7 +37,7 @@ namespace CManager.Presentation.ConsoleApp.Controllers
                 switch (option)
                 {
                     case "1":
-                        CreateCustomer();
+                        _customerController.CreateCustomer();
                         break;
                     case "2":
                         ViewAllCustomers();
@@ -44,45 +50,45 @@ namespace CManager.Presentation.ConsoleApp.Controllers
                 }
             }
         }
-    private void CreateCustomer()
-        {
-            Console.Clear();
-            Console.WriteLine("Create customer");
+    //private void CreateCustomer()
+    //    {
+    //        Console.Clear();
+    //        Console.WriteLine("Create customer");
 
-            Console.Write("First name: ");
-            var firstName = Console.ReadLine()!;
+    //        Console.Write("First name: ");
+    //        var firstName = Console.ReadLine()!;
 
-            Console.Write("Last name: ");
-            var lastName = Console.ReadLine()!;
+    //        Console.Write("Last name: ");
+    //        var lastName = Console.ReadLine()!;
 
-            Console.Write("Email: ");
-            var email = Console.ReadLine()!;
+    //        Console.Write("Email: ");
+    //        var email = Console.ReadLine()!;
 
-            Console.Write("Phonenumber: ");
-            var phoneNumber = Console.ReadLine()!;
+    //        Console.Write("Phonenumber: ");
+    //        var phoneNumber = Console.ReadLine()!;
 
-            Console.Write("Street: ");
-            var streetAddress = Console.ReadLine()!;
+    //        Console.Write("Street: ");
+    //        var streetAddress = Console.ReadLine()!;
 
-            Console.Write("Postal code: ");
-            var postalCode = Console.ReadLine()!;
+    //        Console.Write("Postal code: ");
+    //        var postalCode = Console.ReadLine()!;
 
-            Console.Write("City: ");
-            var city = Console.ReadLine()!;
+    //        Console.Write("City: ");
+    //        var city = Console.ReadLine()!;
 
-            var result = _customerService.CreateCustomer(firstName, lastName, email, phoneNumber, streetAddress, postalCode, city);
+    //        var result = _customerService.CreateCustomer(firstName, lastName, email, phoneNumber, streetAddress, postalCode, city);
 
-            if (result)
-            {
-                Console.WriteLine($"Customer: {firstName} {lastName} added.");
-            }
-            else
-            {
-                Console.WriteLine("There was a hickup while creating customer, please try again!");
-            }
+    //        if (result)
+    //        {
+    //            Console.WriteLine($"Customer: {firstName} {lastName} added.");
+    //        }
+    //        else
+    //        {
+    //            Console.WriteLine("There was a hickup while creating customer, please try again!");
+    //        }
 
-            OutputDialog("Press any key to continue...");
-        }
+    //        OutputDialog("Press any key to continue...");
+    //    }
 
         private void ViewAllCustomers()
         {
