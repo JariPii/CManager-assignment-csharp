@@ -25,6 +25,7 @@ namespace CManager.Presentation.ConsoleApp.Controllers
 
 1. Create Customer
 2. View All Customers
+3. Delete Customer
 0. Exit program");
                 Console.Write("Choose an option: ");
 
@@ -37,6 +38,9 @@ namespace CManager.Presentation.ConsoleApp.Controllers
                         break;
                     case "2":
                         ViewAllCustomers();
+                        break;
+                    case "3":
+                        DeleteCustomer();
                         break;
                     case "0":
                         return;
@@ -73,6 +77,110 @@ namespace CManager.Presentation.ConsoleApp.Controllers
             OutputDialog("Press any key to continue...");
         }
 
+        private void DeleteCustomer()
+        {
+            Console.Clear();
+            Console.WriteLine("All Customers \n");
+
+            var customers = _customerService.GetAllCustomers(out bool hasError).ToList();
+
+            if (hasError)
+            {
+                Console.WriteLine("Something went wrong deleting customer. Please try again.");
+            }
+
+            if (!customers.Any())
+            {
+                Console.WriteLine("No customers found");
+            }
+            else
+            {
+
+                while (true)
+                {
+
+                for(int i = 0; i < customers.Count; i++)
+                {
+                    var customer = customers[i];
+                    Console.WriteLine($"[{i + 1}]{customer.FirstName} {customer.LastName} {customer.Email}");
+                }
+
+                Console.WriteLine("[0] Go back to menu");
+                Console.Write("Enter customer number to delete: ");
+                var input = Console.ReadLine();
+
+
+
+                if(!int.TryParse(input, out int choise))
+                {
+                    OutputDialog("Not a valid number! Press any key to try again...");
+                        continue;
+                }
+
+                if(choise == 0)
+                {
+                    return;
+                }
+
+                if(choise > customers.Count)
+                {
+                    Console.WriteLine($"Number must be between 1 and {customers.Count}. Press any key to try again...");
+                    Console.ReadKey();
+                        continue;
+                }
+                    var index = choise - 1;
+
+                    var selectedCustomer = customers[index];
+
+                    Console.WriteLine("You selected: ");
+                    Console.WriteLine($"Name: {selectedCustomer.FirstName} {selectedCustomer.LastName}");
+
+                    while (true)
+                    {
+                    Console.Write("Are you sure you want to delete this customer? (y/n): ");
+                    var confirmation = Console.ReadLine()!.ToLower();
+
+                    if(confirmation == "y")
+                    {
+                            var result = _customerService.DeleteCustomer(selectedCustomer.Id);
+                            if (result)
+                            {
+                                OutputDialog("Customer was removed, press any key to go back...");
+                                //DeleteCustomer();
+                                return;
+                            }
+                            else
+                            {
+                                OutputDialog("Something went wrong. Please try again. Press any key to continue...");
+                                return;
+                            }
+                    }
+                    else if(confirmation == "n")
+                    {
+                            return;
+                    }
+                    else
+                    {
+                        OutputDialog("Please enter 'y' for yes or 'n' for no press any key to try again...");
+                            continue;
+                    }
+                        
+                    }
+
+
+                }
+                
+            }
+
+            OutputDialog("Press any key...");
+        }
+
+        private void OutputDialog(string message)
+        {
+            Console.WriteLine(message);
+            Console.ReadKey();
+        }
+
         private void ViewAllCustomers()
         {
             Console.Clear();
@@ -91,7 +199,7 @@ namespace CManager.Presentation.ConsoleApp.Controllers
             }
             else
             {
-                foreach(var customer in customers)
+                foreach (var customer in customers)
                 {
                     Console.WriteLine($@"Name: {customer.FirstName} {customer.LastName}
 Email: {customer.Email}
@@ -104,12 +212,6 @@ Id: {customer.Id}");
             }
 
             OutputDialog("Press any key...");
-        }
-
-        private void OutputDialog(string message)
-        {
-            Console.WriteLine(message);
-            Console.ReadKey();
         }
     }
 
